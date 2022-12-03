@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('tots_account', function (Blueprint $table) {
             $table->id();
             $table->string('title', 150);
-            $table->text('caption');
+            $table->text('caption')->nullable(true);
             $table->tinyInteger('status')->nullable(false)->default(0)->comment('0 = Inactive, 1 = Active, 2 = Deleted');
             $table->timestamps();
 
