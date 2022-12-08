@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Tots\Account\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Tots\Auth\Models\TotsUser;
