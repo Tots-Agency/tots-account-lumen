@@ -17,7 +17,7 @@ class AccountMeMiddleware
      */
     public function handle($request, Closure $next)
     {
-        /** \Tots\Account\Models\TotsAccount $account */
+        /** @var \Tots\Account\Models\TotsAccount $account */
         $account = $request->input(TotsAccount::class);
 
         // Verify if has permission in account
@@ -26,6 +26,6 @@ class AccountMeMiddleware
             throw new \Exception('Not has permission');
         }
 
-        return $next($request->merge([TotsAccountPermission::class, $permission]));
+        return $next($request->merge([TotsAccountPermission::class => $permission]));
     }
 }
