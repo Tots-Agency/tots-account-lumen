@@ -18,7 +18,7 @@ class AccountMeMiddleware
     public function handle($request, Closure $next)
     {
         /** \Tots\Account\Models\TotsAccount $account */
-        $account = $request->input('account');
+        $account = $request->input(TotsAccount::class);
 
         // Verify if has permission in account
         $permission = TotsAccountPermission::where('account_id', $account->id)->where('user_id', $request->user()->id)->first();
