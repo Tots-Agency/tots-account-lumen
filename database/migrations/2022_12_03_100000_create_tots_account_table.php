@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title', 150);
             $table->text('caption')->nullable(true);
-            $table->tinyInteger('status')->nullable(false)->default(0)->comment('0 = Inactive, 1 = Active, 2 = Deleted');
+            $table->tinyInteger('status')->nullable(false)->default(0)->comment('0 = Inactive, 1 = Active, 2 = Deleted, 3 = Non-Payment');
             $table->timestamps();
 
             $table->index('status');
