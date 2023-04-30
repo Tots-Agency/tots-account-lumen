@@ -12,6 +12,8 @@ use Tots\Auth\Models\TotsUser;
  */
 class TotsAccountPermission extends Model
 {
+    const ROLE_ADMIN = 0;
+
     protected $table = 'tots_account_permission';
     
     //protected $casts = ['data' => 'array'];
