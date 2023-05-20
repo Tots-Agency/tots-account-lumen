@@ -15,7 +15,7 @@ class CreateController extends \Laravel\Lumen\Routing\Controller
         $account = $request->input(TotsAccount::class);
         // Verify if exist permission
         $perm = TotsAccountPermission::where('account_id', $account->id)
-            ->where('user_id', $request->user()->id)
+            ->where('user_id', $request->input('user_id'))
             ->first();
 
         if($perm !== null) {
@@ -25,7 +25,7 @@ class CreateController extends \Laravel\Lumen\Routing\Controller
         // Create permission
         $perm = new TotsAccountPermission();
         $perm->account_id = $account->id;
-        $perm->user_id = $request->user()->id;
+        $perm->user_id = $request->input('user_id');
         $perm->role = TotsAccountPermission::ROLE_ADMIN;
         $perm->save();
 
