@@ -16,7 +16,7 @@ class AccountMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $accountId = $request->input('account_id') ?? $request->input('id');
+        $accountId = $request->input('account_id') ?? $request->route('account_id') ?? $request->input('id') ?? $request->route('id');
         if($accountId <= 0){
             throw new \Exception('The account id is required');
         }
