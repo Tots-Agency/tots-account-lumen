@@ -14,6 +14,6 @@ class RemoveByIdController extends \Laravel\Lumen\Routing\Controller
             throw new \Exception('Item not exist');
         }
         $item->delete();
-        return ['deletes' => $id];
+        return ['delete' => $id];
     }
 }

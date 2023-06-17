@@ -15,8 +15,7 @@ class UpdateController extends \Laravel\Lumen\Routing\Controller
         }
         // Process validations
         $this->validate($request, [
-            'title' => 'required|min:3',
-            'caption' => 'required|min:3',
+            'title' => 'required|min:3'
         ]);
         // Update values
         $item->title = $request->input('title');
