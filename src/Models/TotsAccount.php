@@ -3,6 +3,7 @@
 namespace Tots\Account\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Tots\Auth\Models\TotsUser;
 
 /**
  * Description of Model
@@ -25,4 +26,9 @@ class TotsAccount extends Model
      * @var bool
      */
     //public $timestamps = false;
+
+    public function creator()
+    {
+        return $this->hasOneThrough(TotsUser::class, TotsAccountPermission::class, 'account_id', 'id', 'id', 'user_id');
+    }
 }
