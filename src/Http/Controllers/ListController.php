@@ -15,8 +15,33 @@ class ListController extends \Laravel\Lumen\Routing\Controller
         $elofilter = \Tots\EloFilter\Query::run(TotsAccount::class, $request);
         // Custom filters
         $this->processWheresCreator($elofilter);
+        // Custom Orders
+        $this->processOrders($elofilter);
         // Execute query
         return $elofilter->execute();
+    }
+
+    protected function processOrders(\Tots\EloFilter\Query $elofilter)
+    {
+        $orders = $elofilter->getQueryRequest()->getOrders();
+
+        $isAddUserJoin = false;
+        for ($i=0; $i < count($orders); $i++) {
+            $order = $orders[$i];
+            if(is_array($order->field)){
+                $orders[$i]->field = implode('.', $order->field);
+                $isAddUserJoin = true;
+            } else if($order->field == 'creator.firstname'){
+                $isAddUserJoin = true;
+            }
+        }
+
+        $elofilter->getQueryRequest()->setOrders($orders);
+
+        if($isAddUserJoin){
+            $elofilter->getQueryRequest()->addJoin('tots_account_permission', 'tots_account_permission.account_id', 'tots_account.id');
+            $elofilter->getQueryRequest()->addJoin('tots_user AS creator', 'creator.id', 'tots_account_permission.user_id');
+        }
     }
 
     protected function processWheresCreator(\Tots\EloFilter\Query $elofilter)
